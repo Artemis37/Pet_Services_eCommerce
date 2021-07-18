@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/navigation.cshtml";
+    ViewBag.Title = "Login";
+}
+    <div class="container-fluid">
+        <div class="login-form-container row justify-content-center align-items-center">
+            <form action="CheckUserName" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" aria-describedby="passwordHelp"/>
+                    <small id="passwordHelp" class="form-text text-muted">Password need to include normall charracter, capitalized and number </small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script> <!-- Common jquery plugin -->
+    <script src="~/Scripts/popper.min.js"></script> <!----Popper plugin-->
+    <script src="~/Scripts/bootstrap.min.js"></script> <!--bootstrap working-->
+
