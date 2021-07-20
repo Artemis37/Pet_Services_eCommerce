@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/navigation.cshtml";
+}
+<div class="container-fluid overflow-hidden">
+    <div class="login-form-container row justify-content-center align-items-center" id="register-form-inner">
+        <form action="RegisterProcess" method="post" class="col-4">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelp" required />
+                <small id="passwordHelp" class="form-text text-muted">Password need to include normall charracter, capitalized and number </small>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input type="text" name="fullname" id="fullname" class="form-control" required />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" required />
+                </div>
+                <div class="form-group col-7">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required />
+                </div>
+                <div class="form-group col-2">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="" selected>Choose....</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="">Secret</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ques">Secret Question</label>
+                <select class="form-control" name="ques" id="ques">
+                    <option value="">Choose secret question in case forgot password</option>
+                    <option value="What is your dogs name?">What is your dog's name?</option>
+                    <option value="What is your elementary school?">What is your elementary school?</option>
+                    <option value="When did you have first car?">When did you have first car?</option>
+                </select>
+                <input type="text" name="ans" id="ans" class="form-control mt-3" placeholder="answer" />
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+        @{
+            if (Request.Cookies["result"] != null)
+            {
+                @:<h1 class="text-warning text-center" id="register-result">@Request.Cookies["result"].Value</h1>
+            }
+        }
+</div>
+

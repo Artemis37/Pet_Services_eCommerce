@@ -129,7 +129,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\DBConnection\DAO.cs" />
+    <Compile Include="Models\Entity\account.cs" />
+    <Compile Include="Models\Entity\appointment.cs" />
+    <Compile Include="Models\Entity\services.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +215,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Default\index.cshtml" />
     <Content Include="Views\About\about.cshtml" />
     <Content Include="Views\Contact\Contact.cshtml" />
@@ -222,6 +222,8 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Views\Shared\navigation.cshtml" />
+    <Content Include="Views\Login\RegisterForm.cshtml" />
+    <Content Include="Views\Login\testDB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

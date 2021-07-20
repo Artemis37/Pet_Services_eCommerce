@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PetServicesStore.Models
+namespace PetServicesStore.Models.Entity
 {
-    public class Test
+    public class services
     {
         public int id { get; set; }
         public string name { get; set; }
+        public double price { get; set; }
 
-        public Test()
-        {
-        }
-        public Test(int id, string name)
+        public services(int id, string name, double price)
         {
             this.id = id;
             this.name = name;
+            this.price = price;
         }
     }
 }

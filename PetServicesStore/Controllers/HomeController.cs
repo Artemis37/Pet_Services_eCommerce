@@ -11,8 +11,7 @@ namespace PetServicesStore.Controllers
     {
         public ActionResult Index()
         {
-            var temp = new Test() { id=1, name="Iron Man" };
-            return View(temp);
+            return View();
         }
 
         public ActionResult About()
