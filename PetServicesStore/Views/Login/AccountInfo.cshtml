@@ -1,0 +1,137 @@
+﻿@using PetServicesStore.Models;
+@using PetServicesStore.Models.Entity;
+
+@{
+    ViewBag.Title = "Account Detail";
+    Layout = "~/Views/Shared/navigation.cshtml";
+}
+
+@if (Request.Cookies["userinfo"] == null && Request.Cookies["editUser"]==null)
+{
+    Response.Redirect("~/Default/Index");
+}else
+{
+    int state = 0;
+    if (ViewBag.State != null)
+    {
+        state = ViewBag.State;
+    }
+    string username="";
+    bool isEditRole = false;
+    if (Request.Cookies["editUser"] != null)
+    {
+        username = Request.Cookies["editUser"].Value;
+        isEditRole = true;
+    }else
+    {
+        username = Request.Cookies["userinfo"]["username"];
+    }
+    DAO ob = new DAO();
+    ob.getData();
+    account acc = ob.LoginAcc[username];
+<div class="container-fluid overflow-hidden">
+    <div class="login-form-container row justify-content-center align-items-center" id="register-form-inner">
+        <form action="UpdateAccount" method="post" class="col-4">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" value="@acc.username" readonly required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelp" value="@acc.password" @if (state == 0) { @: readonly
+                       } required />
+                <small id="passwordHelp" class="form-text text-muted">Password need to include normall charracter, capitalized and number </small>
+            </div>
+            @if(!isEditRole)
+            {
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input type="text" name="fullname" id="fullname" class="form-control" value="@acc.fullName" @if (state == 0) { @: readonly
+                       } required />
+            </div>
+            }else
+            {
+            <div class="form-row">
+                <div class="form-group col-10">
+                    <label for="fullname">Fullname</label>
+                    <input type="text" name="fullname" id="fullname" class="form-control" value="@acc.fullName" @if (state == 0) { @: readonly
+                           } required />
+                </div>
+                <div class="form-group col-2">
+                    <label for="userRole">Role</label>
+                    <input id="userRole" type="number" class="form-control" value="@acc.role" name="userRole" min="0" max="1" @if (state == 0) { @:readonly
+                        } required/>
+                </div>
+            </div>
+            }
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" value="@acc.phone.ToString()" required @if (state == 0) { @: readonly
+                           } />
+                </div>
+                <div class="form-group col-7">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" value="@acc.email" required @if (state == 0) { @: readonly
+                           } />
+                </div>
+                <div class="form-group col-2">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="">Choose....</option>
+                        <option value="male" @if (acc.gender == true) { @: selected
+                                }>
+                            Male
+                        </option>
+                        <option value="female" @if (acc.gender == false) { @: selected
+                                }>
+                            Female
+                        </option>
+                        <option value="" @if (acc.gender == null) { @: selected
+                                }>
+                            Secret
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ques">Secret Question</label>
+                <select class="form-control" name="ques" id="ques">
+                    <option value="">Choose secret question in case forgot password</option>
+                    <option value="What is your dogs name?" @if (acc.question.Equals("What is your dogs name?")) { @: selected
+                            }>
+                        What is your dog's name?
+                    </option>
+                    <option value="What is your elementary school?" @if (acc.question.Equals("What is your elementary school?")) { @: selected
+                            }>
+                        What is your elementary school?
+                    </option>
+                    <option value="When did you have first car?" @if (acc.question.Equals("When did you have first car?")) { @: selected
+                            }>
+                        When did you have first car?
+                    </option>
+                </select>
+                <input type="text" name="ans" id="ans" class="form-control mt-3" placeholder="answer" value="@acc.answer" @if (state == 0) { @: readonly
+                       } />
+            </div>
+            @{
+                if (state == 0)
+                {
+                    @:<a href="@Url.Action("EditAccountInfo", "Login")" class="btn btnEdit">Edit<i class="fas fa-edit" style="margin-left:4px;"></i></a>
+                }
+                else
+                {
+                    @:<button type="submit" class="btn btn-primary">Update Info</button>
+                }
+            }
+        </form>
+    </div>
+    @{
+        if (Request.Cookies["result"] != null)
+        {
+            @:<h1 class="text-warning text-center" id="register-result">@Request.Cookies["result"].Value</h1>
+            Request.Cookies["result"].Expires = DateTime.Now.AddDays(-1);
+        }
+    }
+</div>
+}

@@ -55,6 +55,7 @@
             if (Request.Cookies["result"] != null)
             {
                 @:<h1 class="text-warning text-center" id="register-result">@Request.Cookies["result"].Value</h1>
+                Request.Cookies["result"].Expires = DateTime.Now.AddDays(-1);
             }
         }
 </div>

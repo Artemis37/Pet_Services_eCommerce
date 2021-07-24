@@ -11675,3 +11675,55 @@ h3.color-white {
     line-height: 42px; } }
 
 /*# sourceMappingURL=style-starter.css.map */
+
+
+/*Stype account dropdown*/
+.accountDetail {
+    font-size: 12px;
+    padding-left: 23px;
+    color: white;
+}
+/*Stype account dropdown*/
+
+.btnEdit {
+    color: #f37603;
+    background-color: inherit;
+}
+
+.price-board {
+    height: 330px;
+    background-color: var(--back-color);
+    transform: scale(1.6,1.6) translateY(14px);
+}
+
+.outer-price-table {
+    overflow: hidden;
+}
+
+.price-table-bg {
+    background: var(--back-color);
+}
+
+.btnBookAppointment {
+    transform: translate(20px,70px);
+}
+
+.btnBookAppointment a {
+    color: #fff;
+}
+
+.accountList-outer{
+    overflow: hidden;
+}
+
+.accountList {
+    height: 516px;
+    margin-top: 50px;
+    font-size: 15px;
+}
+
+.appointmentTable{
+    height: 516px;
+    font-size: 15px;
+    margin-top: 50px;
+}

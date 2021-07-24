@@ -19,6 +19,7 @@ insert into account values ('admin', 'Admin1234', 0, 'Mr.Artemis', 01234632543, 
 select * from account;
 
 delete from account where username='mra';
+delete from account where phone=349746383;
 select * from account;
 
 create table [services] (
@@ -28,10 +29,10 @@ create table [services] (
 )
 
 insert into [services] values(1, 'Ear Cleaning', 15);
-insert into [services] values(2, 'Clipping Fur', 15);
-insert into [services] values(3, 'Brushing', 15);
-insert into [services] values(4, 'Nail Trim', 15);
-insert into [services] values(5, 'Grooming Program', 15);
+insert into [services] values(2, 'Clipping Fur', 25);
+insert into [services] values(3, 'Brushing', 30);
+insert into [services] values(4, 'Nail Trim', 5);
+insert into [services] values(5, 'Grooming Program', 40);
 
 select * from [services];
 
@@ -45,4 +46,17 @@ create table appointment (
 	[message] nvarchar(1000)
 );
 
+
 select * from appointment;
+
+update account
+set password = 'Mrb12345', name='Mike Typeson', phone='9999999', email='abc123@gmail.com', gender=0, secret_question='What is your elementary school?', secret_answer='Nguyen Hue'
+where username = 'mra'
+select * from account
+
+select appointment.id, appointment.username, appointment.dog_name, appointment.dog_kind, appointment.dateAppointed, [services].[service_name], appointment.[message]
+from appointment
+inner join [services] on appointment.service_id = [services].service_id
+
+
+delete from appointment where id = 4

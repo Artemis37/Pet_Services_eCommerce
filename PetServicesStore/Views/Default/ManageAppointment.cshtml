@@ -1,0 +1,45 @@
+﻿
+@using PetServicesStore.Models;
+@using PetServicesStore.Models.Entity;
+
+@{
+    ViewBag.Title = "ManageAppointment";
+    Layout = "~/Views/Shared/navigation.cshtml";
+    DAO ob = new DAO();
+    ob.getData();
+
+}
+
+<section class="container-fluid">
+    <div class="row justify-content-center align-items-lg-start appointmentTable">
+        <table class="table col-6">
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Username</th>
+                    <th>Dog's Name</th>
+                    <th>Dog's Kind</th>
+                    <th>Appointed Date</th>
+                    <th>Service</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (appointment item in ob.AppointmentLst.Values)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.username</td>
+                        <td>@item.dogName</td>
+                        <td>@item.dogKind</td>
+                        <td>@item.dateAppointed</td>
+                        <td>@ob.ServicesLst[item.servicesId].name</td>
+                        <td>@item.message</td>
+                        <td><a href="@Url.Action("deleteAppointment","Default", new { aptID = item.id })">Done           <i class="fas fa-check"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

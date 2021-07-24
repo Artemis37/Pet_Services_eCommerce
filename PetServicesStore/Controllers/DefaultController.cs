@@ -25,7 +25,7 @@ namespace PetServicesStore.Controllers
             {
                 DAO ob = new DAO();
                 ob.getData();
-                string username = HttpContext.Request.Cookies["userinfo"]["username"];
+                string username = Request.Cookies["userinfo"]["username"];
                 string dogName = Request.Form["dog_name"];
                 string dogKind = Request.Form["dog_kind"];
                 DateTime appointedDate = DateTime.Parse(Request.Form["appointed_date"]);
@@ -34,6 +34,31 @@ namespace PetServicesStore.Controllers
                 ob.saveAppointment(new appointment(username, dogName, dogKind, appointedDate, serviceId, msg));
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult ManageAccount()
+        {
+            return View();
+        }
+
+        public ActionResult EditAccount()
+        {
+            string username = Request.QueryString["username"];
+            Response.Cookies["editUser"].Value = username;
+            return RedirectToAction("AccountInfo","Login");
+        }
+
+        public ActionResult ManageAppointment()
+        {
+            return View();
+        }
+
+        public ActionResult deleteAppointment()
+        {
+            int aptID = Int32.Parse(Request.Params["aptID"]);
+            DAO ob = new DAO();
+            ob.deleteAppoitment(aptID);
+            return RedirectToAction("ManageAppointment");
         }
     }
 }

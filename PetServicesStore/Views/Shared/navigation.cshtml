@@ -64,9 +64,14 @@
                                 @if (cookie != null)
                                  {
                                     string username = Request.Cookies["userinfo"]["username"];
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">@username</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="@Url.Action("Logout","Login")">Logout</a>
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">@username</a><div class="dropdown-menu rounded" aria-labelledby="navbarDropdown">
+                                        @if (Request.Cookies["userinfo"]!=null && Request.Cookies["userinfo"]["role"].Equals("0")) 
+                                        { 
+                                            <a class="dropdown-item text-uppercase accountDetail" href="@Url.Action("ManageAccount","Default")">Manage Account</a>
+                                            <a class="dropdown-item text-uppercase accountDetail" href="@Url.Action("ManageAppointment","Default")">Appointment</a>
+                                        }
+                                        <a class="dropdown-item text-uppercase accountDetail" href="@Url.Action("AccountInfo","Login")">Account info</a>
+                                        <a class="dropdown-item text-uppercase accountDetail" href="@Url.Action("Logout","Login")">Log out</a>
                                     </div>
                                  }else
                                  {

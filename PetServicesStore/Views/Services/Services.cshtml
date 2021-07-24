@@ -1,4 +1,7 @@
 ﻿
+@using PetServicesStore.Models;
+@using PetServicesStore.Models.Entity;
+
 @{
     Layout = "~/Views/Shared/navigation.cshtml";
     ViewBag.Title = "Services";
@@ -9,167 +12,192 @@
    Author: W3layouts
    Author URL: http://w3layouts.com
 -->
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script> <!-- Common jquery plugin -->
-    <!--bootstrap working-->
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <!-- //bootstrap working-->
-
-    <!-- breadcrumbs -->
-    <section class="w3l-inner-banner-main">
-        <div class="about-inner editContent">
-            <div class="container">
-                <ul class="breadcrumbs-custom-path">
-                    <li class="right-side propClone"><a href="@Url.Action("Index","Default")" class="editContent">Home <span class="fa fa-angle-right" aria-hidden="true"></span></a> <p></li>
-                    <li class="active editContent">Services</li>
-                </ul>
-            </div>
+<!-- breadcrumbs -->
+<section class="w3l-inner-banner-main">
+    <div class="about-inner editContent">
+        <div class="container">
+            <ul class="breadcrumbs-custom-path">
+                <li class="right-side propClone"><a href="@Url.Action("Index","Default")" class="editContent">Home <span class="fa fa-angle-right" aria-hidden="true"></span></a> <p></li>
+                <li class="active editContent">Services</li>
+            </ul>
         </div>
-    </section>
-    <!-- breadcrumbs //-->
-    <section class="w3l-recent-work-hobbies" id="services">
-        <div class="recent-work editContent">
-            <div class="container">
-                <div class="row about-about">
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f5.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Therapy Parlour</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+    </div>
+</section>
+<!-- breadcrumbs //-->
+
+
+<!--service price table-->
+@{ 
+    DAO ob = new DAO();
+    ob.getData();
+}
+<section class="container-fluid outer-price-table">
+    <div class="row align-items-center justify-content-center price-board">
+        <table class="table col-3 border">
+            <thead>
+                <tr>
+                    <td scope="col" class="btn-primary">Services Name</td>
+                    <td scope="col" class="btn-primary">Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (services item in ob.ServicesLst.Values)
+                {
+                    <tr class="text-dark price-table-bg">
+                        <td>@item.name</td>
+                        <td>$@item.price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary justify-content-end btnBookAppointment"><a href="@Url.Action("Index","Default")">Book Now!</a></button>
+    </div>
+</section>
+<!--service price table end-->
+
+<section class="w3l-recent-work-hobbies" id="services">
+    <div class="recent-work editContent">
+        <div class="container">
+            <div class="row about-about">
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f5.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Therapy Parlour</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f4.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Quality & Caring</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f4.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Quality & Caring</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f3.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Ear Cleaning</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f3.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Ear Cleaning</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f2.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Brushing</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f2.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Brushing</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f6.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Clipping Fur</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f6.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Clipping Fur</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
-                        <div class="pet-grid-row">
-                            <img src="~/Content/images/f1.jpg" alt="product" class="img-responsive about-me">
-                            <div class="about-grids editContent">
-                                <h5><a href="#page" class="editContent">Pet Insurance</a></h5>
-                                <p class="para editContent">
-                                    Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                                    quos, nobis culpa est praes entium ipsum
-                                </p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 propClone about-line-top">
+                    <div class="pet-grid-row">
+                        <img src="~/Content/images/f1.jpg" alt="product" class="img-responsive about-me">
+                        <div class="about-grids editContent">
+                            <h5><a href="#page" class="editContent">Pet Insurance</a></h5>
+                            <p class="para editContent">
+                                Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
+                                quos, nobis culpa est praes entium ipsum
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="w3l-services-two" id="services">
-        <div class="service-single-page editContent">
-            <div class="container">
-                <div class=" service-treat">
+    </div>
+</section>
+<section class="w3l-services-two" id="services">
+    <div class="service-single-page editContent">
+        <div class="container">
+            <div class=" service-treat">
 
-                    <div class="service-pet">
-                        <div class="image-grid">
-                            <img src="~/Content/images/f6.jpg" alt="product" class="img-responsive about-me">
-                        </div>
-                        <div class="pet-animals">
-                            <h4>
-                                <a href="#page">
-                                    Bath, Dry &
-                                    Bursh
-                                </a>
-                            </h4>
-                            <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
-                        </div>
+                <div class="service-pet">
+                    <div class="image-grid">
+                        <img src="~/Content/images/f6.jpg" alt="product" class="img-responsive about-me">
                     </div>
-                    <div class="service-pet">
-                        <div class="image-grid">
-                            <img src="~/Content/images/f1.jpg" alt="product" class="img-responsive about-me">
-                        </div>
-                        <div class="pet-animals">
-                            <h4>
-                                <a href="#page">
-                                    Pets Full
-                                    Grooming
-                                </a>
-                            </h4>
-                            <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
-                        </div>
+                    <div class="pet-animals">
+                        <h4>
+                            <a href="#page">
+                                Bath, Dry &
+                                Bursh
+                            </a>
+                        </h4>
+                        <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
                     </div>
-                    <div class="service-pet">
-                        <div class="image-grid">
-                            <img src="~/Content/images/f9.jpg" alt="product" class="img-responsive about-me">
-                        </div>
-                        <div class="pet-animals">
-                            <h4>
-                                <a href="#page">
-                                    Styling Your
-                                    Pets
-                                </a>
-                            </h4>
-                            <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
-                        </div>
-                    </div>
-                    <div class="service-pet">
-                        <div class="image-grid">
-                            <img src="~/Content/images/f8.jpg" alt="product" class="img-responsive about-me">
-                        </div>
-                        <div class="pet-animals">
-                            <h4>
-                                <a href="#page">
-                                    Pets Cleaning
-                                    & Plucking
-                                </a>
-                            </h4>
-                            <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
-                        </div>
-                    </div>
-
                 </div>
+                <div class="service-pet">
+                    <div class="image-grid">
+                        <img src="~/Content/images/f1.jpg" alt="product" class="img-responsive about-me">
+                    </div>
+                    <div class="pet-animals">
+                        <h4>
+                            <a href="#page">
+                                Pets Full
+                                Grooming
+                            </a>
+                        </h4>
+                        <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
+                    </div>
+                </div>
+                <div class="service-pet">
+                    <div class="image-grid">
+                        <img src="~/Content/images/f9.jpg" alt="product" class="img-responsive about-me">
+                    </div>
+                    <div class="pet-animals">
+                        <h4>
+                            <a href="#page">
+                                Styling Your
+                                Pets
+                            </a>
+                        </h4>
+                        <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
+                    </div>
+                </div>
+                <div class="service-pet">
+                    <div class="image-grid">
+                        <img src="~/Content/images/f8.jpg" alt="product" class="img-responsive about-me">
+                    </div>
+                    <div class="pet-animals">
+                        <h4>
+                            <a href="#page">
+                                Pets Cleaning
+                                & Plucking
+                            </a>
+                        </h4>
+                        <p class="para">Voluptas commodi quae accusantium amet dolorum quia architecto assumenda id facere dolorem ex fugiat.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>

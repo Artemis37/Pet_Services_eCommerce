@@ -1,0 +1,47 @@
+﻿
+@using PetServicesStore.Models;
+@using PetServicesStore.Models.Entity;
+
+@{
+    ViewBag.Title = "Manage Account";
+    Layout = "~/Views/Shared/navigation.cshtml";
+    DAO ob = new DAO();
+    ob.getData();
+}
+<section class="container-fluid accountList-outer">
+    <div class="row justify-content-center align-items-start accountList">
+        <table class="table col-8">
+            <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>Password</td>
+                    <td>User Role</td>
+                    <td>Full Name</td>
+                    <td>Phone Number</td>
+                    <td>Email Address</td>
+                    <td>Gender</td>
+                    <td>Secret Question</td>
+                    <td>Secret Answer</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (account item in ob.LoginAcc.Values)
+                {
+                    <tr>
+                        <td>@item.username</td>
+                        <td>@item.password</td>
+                        <td>@item.role</td>
+                        <td>@item.fullName</td>
+                        <td>@item.phone</td>
+                        <td>@item.email</td>
+                        <td>@item.gender</td>
+                        <td>@item.question</td>
+                        <td>@item.answer</td>
+                        <td><a href="@Url.Action("EditAccount","Default", new { type="edit", username=item.username})">Edit         <i class="far fa-edit"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

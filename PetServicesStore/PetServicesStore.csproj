@@ -224,6 +224,9 @@
     <Content Include="Views\Shared\navigation.cshtml" />
     <Content Include="Views\Login\RegisterForm.cshtml" />
     <Content Include="Views\Login\testDB.cshtml" />
+    <Content Include="Views\Login\AccountInfo.cshtml" />
+    <Content Include="Views\Default\ManageAccount.cshtml" />
+    <Content Include="Views\Default\ManageAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

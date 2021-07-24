@@ -51,7 +51,9 @@ namespace PetServicesStore.Models
                 {
                     while (reader.Read())
                     {
-                        LoginAcc.Add(reader.GetString(0), new account(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3), reader.GetInt32(4), reader.GetString(5), reader.GetBoolean(6), reader.GetString(7), reader.GetString(8)));
+                        LoginAcc.Add(reader.GetString(0), new account(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3),
+                                                                      reader.GetInt32(4), reader.GetString(5), reader["gender"]==DBNull.Value?null:(reader["gender"] as Nullable<bool>),
+                                                                      reader.GetString(7), reader.GetString(8)));
                     }
                 }
                 reader.Close();
@@ -93,7 +95,47 @@ namespace PetServicesStore.Models
             }
         }
 
-        public string register(account acc)
+        //===========================
+        //validate input for register
+        //===========================
+
+        public string checkUsername(string username, out string result)
+        {
+            //getData();
+            if (loginAcc.ContainsKey(username))
+            {
+                result = "There's already existed username";
+                return username;
+            }
+            else{
+                result = "";
+                return username;
+            }
+        }
+        public string checkPassword(string password, out string result)
+        {
+            bool isContainUpperCase= false;
+            bool isContainNumber = false;
+            foreach (char item in password.ToCharArray())
+            {
+                if (char.IsUpper(item)) isContainUpperCase = true;
+                if (char.IsNumber(item)) isContainNumber = true;
+            }
+            if (isContainNumber && isContainUpperCase)
+            {
+                result = "";
+                return password;
+            }
+            else if (isContainNumber == false)
+            {
+                result = "password need to include a number";
+                return password;
+            }
+            result = "password need to have a capitalized letter";
+            return password;
+        }
+
+        public void register(account acc)
         {
             using (conn = new SqlConnection(connString))
             {
@@ -113,11 +155,50 @@ namespace PetServicesStore.Models
                     command.Parameters.AddWithValue(@"question", acc.question);
                     command.Parameters.AddWithValue(@"answer", acc.answer);
                     command.ExecuteNonQuery();
-                    return "Create account success";
                 }
                 catch (Exception)
                 {
-                    return "Create account failed";
+                    return;
+                }
+            }
+        }
+        //==========================
+        //end register
+        //==========================
+
+        public void updateAccount(account acc)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = "update account " +
+                        "set password = @password, " +
+                        "user_role = @role, " +
+                        "name=@name, " +
+                        "phone=@phone, " +
+                        "email=@email, " +
+                        "gender=@gender, " +
+                        "secret_question=@ques, " +
+                        "secret_answer=@ans where username = @username";
+                    SqlCommand command = new SqlCommand(sql, conn);
+                    command.Parameters.AddWithValue(@"username", acc.username);
+                    command.Parameters.AddWithValue(@"password", acc.password);
+                    command.Parameters.AddWithValue(@"role", acc.role);
+                    command.Parameters.AddWithValue(@"name", acc.fullName);
+                    command.Parameters.AddWithValue(@"phone", acc.phone);
+                    command.Parameters.AddWithValue(@"email", acc.email);
+                    if (acc.gender == null) command.Parameters.AddWithValue(@"gender", DBNull.Value);
+                    else command.Parameters.AddWithValue(@"gender", acc.gender);
+                    command.Parameters.AddWithValue(@"ques", acc.question);
+                    command.Parameters.AddWithValue(@"ans", acc.answer);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    //string temp = e.Message;
+                    return;
                 }
             }
         }
@@ -145,6 +226,17 @@ namespace PetServicesStore.Models
                 //    return "Something wrong";
                 //    throw;
                 //}
+            }
+        }
+
+        public void deleteAppoitment(int id)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                string sql = "delete from appointment where id = " + id;
+                command = new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();
             }
         }
     }
